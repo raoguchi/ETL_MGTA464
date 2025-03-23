@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ETL Project – MGTA 464</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown-dark.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night.min.css">
+    <style>
+        body {
+            margin: 40px auto;
+            max-width: 900px;
+            padding: 0 20px;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #58a6ff;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 0.3em;
+        }
+
+        a {
+            color: #58a6ff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+            font-family: monospace;
+        }
+
+        th,
+        td {
+            border: 1px solid #30363d;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #161b22;
+        }
+
+        pre {
+            background-color: #161b22 !important;
+            padding: 1em;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: monospace;
+            font-size: 0.95em;
+        }
+
+        ul,
+        ol {
+            padding-left: 1.2em;
+        }
+    </style>
+</head>
+
+<body class="markdown-body">
+
+    <h1>ETL Project – MGTA 464</h1>
+
+    <p>This project showcases a full ETL (Extract, Transform, Load) pipeline developed as part of the MGTA 464 course.
+        It involves processing and integrating data from multiple formats including CSV, XML, PostgreSQL, and public
+        geospatial sources. The final output is a structured and enriched dataset suitable for analysis in Snowflake.
+    </p>
+
+    <h2>🚀 Overview</h2>
+    <ul>
+        <li>Parsing structured and semi-structured files.</li>
+        <li>Performing joins and aggregations.</li>
+        <li>Mapping geospatial coordinates to ZIP Code Tabulation Areas (ZCTAs).</li>
+        <li>Loading data into a cloud-based Snowflake warehouse.</li>
+    </ul>
+
+    <h2>📂 Tasks Breakdown</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Q1</strong></td>
+                <td>Parse and upload <code>CSV</code> data (<code>supplier_case.csv</code>) into a Snowflake table.</td>
+            </tr>
+            <tr>
+                <td><strong>Q2</strong></td>
+                <td>Create a derived column (e.g., <code>TotalAmount</code>) and calculate aggregated sums.</td>
+            </tr>
+            <tr>
+                <td><strong>Q3</strong></td>
+                <td>Parse and upload supplier transactions from an <code>XML</code> file into a relational format.</td>
+            </tr>
+            <tr>
+                <td><strong>Q4 + Q5</strong></td>
+                <td>Join multiple SQL tables to enrich data with descriptions and context.</td>
+            </tr>
+            <tr>
+                <td><strong>Q6</strong></td>
+                <td>Convert a <code>.pgsql</code> file to CSV for uploading to Snowflake.</td>
+            </tr>
+            <tr>
+                <td><strong>Q7</strong></td>
+                <td>Use ZIP metadata (<code>2021_Gaz_zcta_national.txt</code>) to assign locations from coordinates.
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Q8</strong></td>
+                <td>Join geospatial and temporal data into a unified fact table for analytics.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>📊 Example: Supplier Transactions (from XML)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>SupplierTransactionID</th>
+                <th>SupplierID</th>
+                <th>TransactionDate</th>
+                <th>TransactionAmount</th>
+                <th>IsFinalized</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>134</td>
+                <td>2</td>
+                <td>2019-01-02</td>
+                <td>360.53</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>169</td>
+                <td>4</td>
+                <td>2019-01-02</td>
+                <td>24,991.80</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>224</td>
+                <td>10</td>
+                <td>2019-01-02</td>
+                <td>40,327.64</td>
+                <td>1</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🗺️ ZIP Code Geospatial Mapping</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ZIP Code</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Area (sq mi)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>00601</td>
+                <td>18.180555</td>
+                <td>-66.749961</td>
+                <td>64.42</td>
+            </tr>
+            <tr>
+                <td>00602</td>
+                <td>18.361945</td>
+                <td>-67.175597</td>
+                <td>30.33</td>
+            </tr>
+            <tr>
+                <td>00603</td>
+                <td>18.458497</td>
+                <td>-67.123906</td>
+                <td>34.35</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>⚙️ Technologies Used</h2>
+    <ul>
+        <li><strong>Python</strong>: Pandas, <code>xml.etree</code>, <code>psycopg2</code></li>
+        <li><strong>Snowflake</strong>: Cloud SQL warehouse</li>
+        <li><strong>SQL</strong> (PostgreSQL, Snowflake): Joins, Aggregation</li>
+        <li><strong>Geospatial Matching</strong>: ZIP Coordinate Mapping</li>
+    </ul>
+
+    <h2>🔌 Snowflake Connector Setup</h2>
+    <pre><code class="language-python">import snowflake.connector
+
+conn = snowflake.connector.connect(
+    user='your_user',
+    password='your_password',
+    account='your_account'
+)
+cs = conn.cursor()</code></pre>
+
+    <h2>🧱 Creating Database and Stage</h2>
+    <pre><code class="language-python">cs.execute("CREATE DATABASE IF NOT EXISTS maindb")
+cs.execute("USE DATABASE maindb")
+cs.execute("CREATE OR REPLACE STAGE POStage")
+cs.execute("USE SCHEMA PUBLIC")</code></pre>
+
+    <h2>📥 Loading CSV into Pandas</h2>
+    <pre><code class="language-python">import pandas as pd
+
+df = pd.read_csv("supplier_case.csv")
+print(df.head())</code></pre>
+
+    <h2>📄 Parsing XML Transactions</h2>
+    <pre><code class="language-python">import xml.etree.ElementTree as ET
+
+tree = ET.parse("Supplier_Transactions_XML.xml")
+root = tree.getroot()
+
+for row in root.findall("row"):
+    trans_id = row.find("SupplierTransactionID").text
+    amount = row.find("TransactionAmount").text
+    print(f"Transaction {trans_id}: ${amount}")</code></pre>
+
+    <h2>🌍 Loading Geospatial Data</h2>
+    <pre><code class="language-python">geo_df = pd.read_csv("2021_Gaz_zcta_national.txt", sep="\\t")
+geo_df[["GEOID", "INTPTLAT", "INTPTLONG"]].head()</code></pre>
+
+    <h2>🔁 Pipeline Flow</h2>
+    <pre><code class="plaintext">CSV/XML/PGSQL
+     ↓
+ Python ETL Scripts
+     ↓
+ Intermediate Transforms
+     ↓
+ Geospatial & Time-Series Join
+     ↓
+ Snowflake Upload</code></pre>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</body>
+
+</html>
