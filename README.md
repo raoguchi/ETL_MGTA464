@@ -1,5 +1,7 @@
 # ETL Project – MGTA 464
 
+### By Alex Oguchi
+
 This project showcases a full ETL (Extract, Transform, Load) pipeline developed as part of the MGTA 464 course. It involves processing and integrating data from multiple formats including CSV, XML, PostgreSQL, and public geospatial sources. The final output is a structured and enriched dataset suitable for analysis in Snowflake.
 
 ---
